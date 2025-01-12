@@ -1,0 +1,16 @@
+{
+  "name": "favorites-get",
+  "path": "/api/favorite/get",
+  "method": "GET",
+  "description": "favorites-get",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "favorites-get"
+  }]
+}

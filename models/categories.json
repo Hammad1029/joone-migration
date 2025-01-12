@@ -1,0 +1,15 @@
+{
+  "name": "categories",
+  "table": "categories",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "slug", "as": "slug", "dataType": "string" },
+    { "column": "icon", "as": "icon", "dataType": "string" },
+    { "column": "image", "as": "image", "dataType": "string" },
+    { "column": "parent_id", "as": "parent_id", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" },
+    { "column": "type", "as": "type", "dataType": "number" }
+  ]
+}

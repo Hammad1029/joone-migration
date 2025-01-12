@@ -1,0 +1,18 @@
+{
+  "name": "lead-create",
+  "description": "lead-create",
+  "startState": 100,
+  "rules": ["verify-token", "lead-create"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "lead-create",
+      "states": {}
+    }
+  }
+}

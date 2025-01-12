@@ -1,0 +1,30 @@
+{
+  "name": "partner",
+  "table": "service_person_details",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "password", "as": "password", "dataType": "string" },
+    { "column": "city_id", "as": "city_id", "dataType": "number" },
+    { "column": "email", "as": "email", "dataType": "string" },
+    { "column": "description", "as": "description", "dataType": "string" },
+    { "column": "address", "as": "address", "dataType": "string" },
+    { "column": "phone", "as": "phone", "dataType": "string" },
+    { "column": "nic", "as": "nic", "dataType": "string" },
+    { "column": "date_of_birth", "as": "date_of_birth", "dataType": "string" },
+    { "column": "fcm_token", "as": "fcm_token", "dataType": "string" },
+    { "column": "device_type", "as": "device_type", "dataType": "string" },
+    { "column": "device_id", "as": "device_id", "dataType": "string" },
+    { "column": "rating", "as": "rating", "dataType": "number" },
+    {
+      "column": "commission_percentage",
+      "as": "commission_percentage",
+      "dataType": "number"
+    },
+    { "column": "gender", "as": "gender", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

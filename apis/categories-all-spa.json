@@ -1,0 +1,16 @@
+{
+  "name": "categories-all-spa",
+  "path": "/api/category/all/spa",
+  "method": "GET",
+  "description": "categories-all-spa",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "categories-all-spa"
+  }]
+}

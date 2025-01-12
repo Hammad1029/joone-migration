@@ -1,0 +1,16 @@
+{
+  "name": "user-address-get",
+  "path": "/api/user/address/customer-addresses",
+  "method": "GET",
+  "description": "user-address-get",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "user-address-get"
+  }]
+}

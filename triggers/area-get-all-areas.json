@@ -1,0 +1,12 @@
+{
+  "name": "get-all-areas",
+  "description": "get-all-areas",
+  "startState": 100,
+  "rules": ["get all areas"],
+  "branchFlows": {
+    "100": {
+      "rule": "get all areas",
+      "states": {}
+    }
+  }
+}

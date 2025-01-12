@@ -1,0 +1,14 @@
+{
+  "name": "notifications",
+  "table": "notifications",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "customer_id", "as": "customer_id", "dataType": "number" },
+    { "column": "response", "as": "response", "dataType": "string" },
+    { "column": "body", "as": "body", "dataType": "string" },
+    { "column": "data", "as": "data", "dataType": "string" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

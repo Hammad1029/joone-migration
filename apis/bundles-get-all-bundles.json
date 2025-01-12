@@ -1,0 +1,16 @@
+{
+  "name": "get-all-bundles",
+  "path": "/api/bundles",
+  "method": "GET",
+  "description": "get-all-bundles",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "bundles-get-all-bundles"
+  }]
+}

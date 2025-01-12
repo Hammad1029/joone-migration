@@ -1,0 +1,96 @@
+{
+  "name": "order-create",
+  "path": "/api/order/create",
+  "method": "POST",
+  "description": "order-create",
+  "request": {
+    "address_id": {
+      "dataType": "number",
+      "required": true,
+      "config": {
+        "minimum": 1,
+        "maximum": 100000000,
+        "in": []
+      }
+    },
+    "booking_date": {
+      "dataType": "text",
+      "required": true,
+      "config": {
+        "alpha": false,
+        "numeric": true,
+        "special": true,
+        "minimum": 10,
+        "maximum": 10,
+        "in": []
+      }
+    },
+    "service_date": {
+      "dataType": "text",
+      "required": true,
+      "config": {
+        "alpha": false,
+        "numeric": true,
+        "special": true,
+        "minimum": 10,
+        "maximum": 10,
+        "in": []
+      }
+    },
+    "service_time": {
+      "dataType": "text",
+      "required": true,
+      "config": {
+        "alpha": false,
+        "numeric": true,
+        "special": true,
+        "minimum": 8,
+        "maximum": 8,
+        "in": []
+      }
+    },
+    "data": {
+      "dataType": "array",
+      "required": true,
+      "config": {
+        "ofType": {
+          "dataType": "map",
+          "required": true,
+          "config": {
+            "quantity": {
+              "dataType": "number",
+              "required": true,
+              "config": {
+                "minimum": 0,
+                "maximum": 10000000,
+                "in": []
+              }
+            },
+            "service_rate": {
+              "dataType": "number",
+              "required": true,
+              "config": {
+                "minimum": 0,
+                "maximum": 10000000,
+                "in": []
+              }
+            }
+          }
+        },
+        "minimum": 0,
+        "maximum": 10000000
+      }
+    }
+  },
+  "preConfig": {},
+  "triggers": [
+    {
+      "if": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      },
+      "trigger": "order-create"
+    }
+  ]
+}

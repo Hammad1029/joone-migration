@@ -1,0 +1,12 @@
+{
+  "name": "categories-all-salon",
+  "description": "categories-all-salon",
+  "startState": 100,
+  "rules": ["categories-all-salon"],
+  "branchFlows": {
+    "100": {
+      "rule": "categories-all-salon",
+      "states": {}
+    }
+  }
+}

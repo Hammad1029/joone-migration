@@ -1,0 +1,17 @@
+{
+  "name": "user_addresses",
+  "table": "customer_addresses",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "address", "as": "address", "dataType": "string" },
+    { "column": "location", "as": "location", "dataType": "string" },
+    { "column": "city_id", "as": "city_id", "dataType": "number" },
+    { "column": "area_id", "as": "area_id", "dataType": "number" },
+    { "column": "customer_id", "as": "customer_id", "dataType": "number" },
+    { "column": "is_primary", "as": "is_primary", "dataType": "boolean" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" },
+    { "column": "deleted_at", "as": "deleted_at", "dataType": "string" }
+  ]
+}

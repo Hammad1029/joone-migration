@@ -1,0 +1,16 @@
+{
+  "name": "favorites-create",
+  "path": "/api/favorite/create",
+  "method": "POST",
+  "description": "favorites-create",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "favorites-create"
+  }]
+}

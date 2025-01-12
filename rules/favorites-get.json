@@ -1,0 +1,225 @@
+{
+  "name": "favorites-get",
+  "description": "favorites-get",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "favorite_ids": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results.[].service_id",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "favorites",
+                "where": {
+                  "template": "favorites.customer_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "populate": [],
+                "project": [
+                  {
+                    "column": "service_id",
+                    "as": "service_id",
+                    "dataType": ""
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "favorites fetched successfully!",
+        "status": true,
+        "favorite_data": {
+          "salon": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".results",
+              "input": {
+                "resolveType": "orm",
+                "resolveData": {
+                  "operation": "select",
+                  "model": "categories",
+                  "where": {
+                    "template": "categories.parent_id is null and categories.status = 1 and categories.type != '1'",
+                    "values": []
+                  },
+                  "project": [],
+                  "populate": [
+                    {
+                      "model": "categories",
+                      "as": "sub_categories",
+                      "required": false,
+                      "where": {
+                        "template": "",
+                        "values": []
+                      },
+                      "populate": [
+                        {
+                          "model": "services",
+                          "as": "services",
+                          "where": {
+                            "template": "categories_sub_categories_services.id in ?",
+                            "values": [
+                              {
+                                "resolveType": "jq",
+                                "resolveData": {
+                                  "query": ".favorite_ids",
+                                  "input": {
+                                    "resolveType": "getStore",
+                                    "resolveData": {}
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "populate": [],
+                          "project": []
+                        }
+                      ],
+                      "project": []
+                    },
+                    {
+                      "model": "services",
+                      "as": "services",
+                      "required": false,
+                      "where": {
+                        "template": "categories_services.id in ?",
+                        "values": [
+                          {
+                            "resolveType": "jq",
+                            "resolveData": {
+                              "query": ".favorite_ids",
+                              "input": {
+                                "resolveType": "getStore",
+                                "resolveData": {}
+                              }
+                            }
+                          }
+                        ],
+                        "populate": [],
+                        "project": []
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "spa": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".results",
+              "input": {
+                "resolveType": "orm",
+                "resolveData": {
+                  "operation": "select",
+                  "model": "categories",
+                  "where": {
+                    "template": "categories.parent_id is null and categories.status = 1 and categories.type != '0'",
+                    "values": []
+                  },
+                  "project": [],
+                  "populate": [
+                    {
+                      "model": "categories",
+                      "as": "sub_categories",
+                      "required": false,
+                      "where": {
+                        "template": "",
+                        "values": []
+                      },
+                      "populate": [
+                        {
+                          "model": "services",
+                          "as": "services",
+                          "where": {
+                            "template": "categories_sub_categories_services.id in ?",
+                            "values": [
+                              {
+                                "resolveType": "jq",
+                                "resolveData": {
+                                  "query": ".favorite_ids",
+                                  "input": {
+                                    "resolveType": "getStore",
+                                    "resolveData": {}
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "populate": [],
+                          "project": []
+                        }
+                      ],
+                      "project": []
+                    },
+                    {
+                      "model": "services",
+                      "as": "services",
+                      "required": false,
+                      "where": {
+                        "template": "categories_services.id in ?",
+                        "values": [
+                          {
+                            "resolveType": "jq",
+                            "resolveData": {
+                              "query": ".favorite_ids",
+                              "input": {
+                                "resolveType": "getStore",
+                                "resolveData": {}
+                              }
+                            }
+                          }
+                        ],
+                        "populate": [],
+                        "project": []
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

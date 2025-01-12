@@ -1,0 +1,41 @@
+{
+  "name": "order",
+  "table": "bookings",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "customer_id", "as": "customer_id", "dataType": "number" },
+    { "column": "booking_code", "as": "booking_code", "dataType": "string" },
+    { "column": "address_id", "as": "address_id", "dataType": "number" },
+    {
+      "column": "service_person_id",
+      "as": "service_person_id",
+      "dataType": "number"
+    },
+    { "column": "booking_city", "as": "booking_city", "dataType": "number" },
+    { "column": "area_id", "as": "area_id", "dataType": "number" },
+    { "column": "booking_date", "as": "booking_date", "dataType": "string" },
+    { "column": "service_date", "as": "service_date", "dataType": "string" },
+    { "column": "service_time", "as": "service_time", "dataType": "string" },
+    {
+      "column": "booking_status",
+      "as": "booking_status",
+      "dataType": "number"
+    },
+    {
+      "column": "booking_source",
+      "as": "booking_source",
+      "dataType": "number"
+    },
+    {
+      "column": "payment_type_id",
+      "as": "payment_type_id",
+      "dataType": "number"
+    },
+    { "column": "payment_to", "as": "payment_to", "dataType": "string" },
+    { "column": "comment", "as": "comment", "dataType": "string" },
+    { "column": "referred_by", "as": "referred_by", "dataType": "string" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

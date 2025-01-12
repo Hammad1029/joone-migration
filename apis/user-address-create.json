@@ -1,0 +1,16 @@
+{
+  "name": "user-address-create",
+  "path": "/api/user/address/create",
+  "method": "POST",
+  "description": "user-address-create",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "user-address-create"
+  }]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "auth partner authentication",
+  "description": "description",
+  "startState": 100,
+  "rules": ["partner phone exists", "partner device id exists", "auth partner authentication"],
+  "branchFlows": {
+    "100": {
+      "rule": "partner phone exists",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "partner device id exists",
+      "states": {
+        "0": 300
+      }
+    },
+    "300": {
+      "rule": "auth partner authentication",
+      "states": {}
+    }
+  }
+}

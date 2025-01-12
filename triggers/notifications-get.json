@@ -1,0 +1,18 @@
+{
+  "name": "notifications-get",
+  "description": "notifications-get",
+  "startState": 100,
+  "rules": ["verify-token", "notifications-get"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "notifications-get",
+      "states": {}
+    }
+  }
+}

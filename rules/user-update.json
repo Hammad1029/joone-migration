@@ -1,0 +1,145 @@
+{
+  "name": "user-update",
+  "description": "user-update",
+  "pre": [],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "update customer_details set name = ?, nic = ?, date_of_birth = ? where id = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".name",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".nic",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".date_of_birth",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".user_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Information successfully updated...",
+              "status": true
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".results[0]",
+                  "input": {
+                    "resolveType": "orm",
+                    "resolveData": {
+                      "operation": "select",
+                      "model": "user",
+                      "where": {
+                        "template": "user.id = ?",
+                        "values": [
+                          {
+                            "resolveType": "jq",
+                            "resolveData": {
+                              "query": ".user_id",
+                              "input": {
+                                "resolveType": "getStore",
+                                "resolveData": {}
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "opnd": "ne",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "message": "Invalid Customer",
+            "status": false
+          }
+        },
+        {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

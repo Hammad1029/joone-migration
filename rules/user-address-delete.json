@@ -1,0 +1,111 @@
+{
+  "name": "user-address-delete",
+  "description": "user-address-delete",
+  "pre": [],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "delete from customer_addresses where id = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".address_id",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Address was deleted successfully!",
+              "status": true
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".results[0]",
+                  "input": {
+                    "resolveType": "orm",
+                    "resolveData": {
+                      "operation": "select",
+                      "model": "user_addresses",
+                      "where": {
+                        "template": "user_addresses.id = ?",
+                        "values": [
+                          {
+                            "resolveType": "jq",
+                            "resolveData": {
+                              "query": ".address_id",
+                              "input": {
+                                "resolveType": "getReq",
+                                "resolveData": {}
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "opnd": "ne",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "message": "Invalid Address",
+            "status": false
+          }
+        }
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": [
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ]
+}

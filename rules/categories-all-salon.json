@@ -1,0 +1,77 @@
+{
+  "name": "categories-all-salon",
+  "description": "categories-all-salon",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "status": true,
+        "message": "Data fetched successfully!",
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "categories",
+                "where": {
+                  "template": "categories.parent_id is null and categories.status = 1 and categories.type != '1'",
+                  "values": []
+                },
+                "populate": [
+                  {
+                    "model": "categories",
+                    "as": "sub_categories",
+                    "populate": [
+                      {
+                        "model": "services",
+                        "as": "services",
+                        "required": false,
+                        "populate": [],
+                        "where": {
+                          "template": "categories_sub_categories_services.status = 1 and categories_sub_categories_services.type != '1'",
+                          "values": []
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "model": "services",
+                    "as": "services",
+                    "populate": [],
+                    "required": false,
+                    "where": {
+                      "template": "categories_services.status = 1 and categories_services.type != '1'",
+                      "values": []
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

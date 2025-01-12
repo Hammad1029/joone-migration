@@ -1,0 +1,11 @@
+{
+  "name": "areas",
+  "table": "areas",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "city_id", "as": "city_id", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" }
+  ]
+}

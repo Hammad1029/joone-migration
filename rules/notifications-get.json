@@ -1,0 +1,60 @@
+{
+  "name": "notifications-get",
+  "description": "notifications-get",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "notification successfully fetched!",
+        "status": true,
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "notifications",
+                "where": {
+                  "template": "notifications.customer_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "orderBy": "notifications.id desc"
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

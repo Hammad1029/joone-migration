@@ -1,0 +1,16 @@
+{
+  "name": "order-get-all-customer-orders",
+  "path": "/api/order/customer-orders",
+  "method": "GET",
+  "description": "order-get-all-customer-orders",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "order-get-all-customer-orders"
+  }]
+}

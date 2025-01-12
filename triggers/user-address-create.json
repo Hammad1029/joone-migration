@@ -1,0 +1,18 @@
+{
+  "name": "user-address-create",
+  "description": "user-address-create",
+  "startState": 100,
+  "rules": ["verify-token", "user-address-create"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "user-address-create",
+      "states": {}
+    }
+  }
+}

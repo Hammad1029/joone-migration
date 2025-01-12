@@ -1,0 +1,12 @@
+{
+  "name": "categories-all-access",
+  "description": "categories-all-access",
+  "startState": 100,
+  "rules": ["categories-all-access"],
+  "branchFlows": {
+    "100": {
+      "rule": "categories-all-access",
+      "states": {}
+    }
+  }
+}

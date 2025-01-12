@@ -1,0 +1,98 @@
+{
+  "name": "partner device id exists",
+  "description": "partner device id exists",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "partner_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "partner",
+                "where": {
+                  "template": "partner.device_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".device_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "access_token": "",
+              "customer": {},
+              "message": "Partner not registered with this Device, please re-install the app and register your device",
+              "status": false
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "cities-get-all-cities",
+  "description": "cities-get-all-cities",
+  "startState": 100,
+  "rules": ["get-all-cities"],
+  "branchFlows": {
+    "100": {
+      "rule": "get-all-cities",
+      "states": {}
+    }
+  }
+}

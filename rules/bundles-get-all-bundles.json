@@ -1,0 +1,48 @@
+{
+  "name": "get-all-bundles",
+  "description": "get-all-bundles",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "bundles",
+                "where": {
+                  "template":"bundles.status=1 and bundles.deleted_at is null",
+                  "values":[]
+                }
+              }
+            }
+          }
+        },
+        "status": true,
+        "message": "Data fetched successfully!"
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

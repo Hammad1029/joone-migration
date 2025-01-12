@@ -1,0 +1,22 @@
+{
+  "name": "user",
+  "table": "customer_details",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "email", "as": "email", "dataType": "string" },
+    { "column": "phone", "as": "phone", "dataType": "string" },
+    { "column": "nic", "as": "nic", "dataType": "string" },
+    { "column": "date_of_birth", "as": "date_of_birth", "dataType": "string" },
+    { "column": "password", "as": "password", "dataType": "string" },
+    { "column": "location", "as": "location", "dataType": "string" },
+    { "column": "is_verify", "as": "is_verify", "dataType": "boolean" },
+    { "column": "fcm_token", "as": "fcm_token", "dataType": "string" },
+    { "column": "device_type", "as": "device_type", "dataType": "string" },
+    { "column": "device_id", "as": "device_id", "dataType": "string" },
+    { "column": "rating", "as": "rating", "dataType": "number" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "auth partner registration",
+  "description": "description",
+  "startState": 100,
+  "rules": ["partner-exists","auth partner registration"],
+  "branchFlows": {
+    "100": {
+      "rule": "partner-exists",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "auth partner registration",
+      "states": {}
+    }
+  }
+}

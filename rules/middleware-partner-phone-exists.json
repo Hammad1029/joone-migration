@@ -1,0 +1,103 @@
+{
+  "name": "partner phone exists",
+  "description": "partner phone exists",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "partner_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "partner",
+                "where": {
+                  "template": "partner.phone = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": {
+                          "resolveType": "const",
+                          "resolveData": {
+                            "value": ".phone"
+                          }
+                        },
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "access_token": "",
+              "partner": {},
+              "message": "Partner not registered with this Phone Number, please re-install the app and register.",
+              "status": false
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

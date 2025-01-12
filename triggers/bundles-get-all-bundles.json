@@ -1,0 +1,12 @@
+{
+  "name": "bundles-get-all-bundles",
+  "description": "bundles-get-all-bundles",
+  "startState": 100,
+  "rules": ["get-all-bundles"],
+  "branchFlows": {
+    "100": {
+      "rule": "get-all-bundles",
+      "states": {}
+    }
+  }
+}

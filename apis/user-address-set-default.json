@@ -1,0 +1,16 @@
+{
+  "name": "user-address-set-default",
+  "path": "/api/user/address/is_default",
+  "method": "POST",
+  "description": "user-address-set-default",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "user-address-set-default"
+  }]
+}

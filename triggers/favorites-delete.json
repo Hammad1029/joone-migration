@@ -1,0 +1,18 @@
+{
+  "name": "favorites-delete",
+  "description": "favo",
+  "startState": 100,
+  "rules": ["verify-token", "favorites-delete"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "favorites-delete",
+      "states": {}
+    }
+  }
+}

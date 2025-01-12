@@ -1,0 +1,18 @@
+{
+  "name": "categories-service-special-offer",
+  "path": "/api/service/specialOffer",
+  "method": "GET",
+  "description": "categories-service-special-offer",
+  "request": {},
+  "preConfig": {},
+  "triggers": [
+    {
+      "if": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      },
+      "trigger": "categories-service-special-offer"
+    }
+  ]
+}

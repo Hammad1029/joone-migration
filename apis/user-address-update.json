@@ -1,0 +1,16 @@
+{
+  "name": "user-address-update",
+  "path": "/api/user/address/update",
+  "method": "POST",
+  "description": "user-address-update",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "user-address-update"
+  }]
+}

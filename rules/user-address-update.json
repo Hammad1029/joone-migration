@@ -1,0 +1,92 @@
+{
+  "name": "user-address-update",
+  "description": "user-address-update",
+  "pre": [
+    {
+      "resolveType": "query",
+      "resolveData": {
+        "queryString": "update customer_addresses set address= ?, location= ?, city_id= ?, area_id = ? where id = ?;",
+
+        "named": false,
+        "namedParameters": {},
+        "positionalParameters": [
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".address",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".location",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".city_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".area_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".address_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Address was updated successfully!",
+        "status": true
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

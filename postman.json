@@ -1,0 +1,1064 @@
+{
+	"info": {
+		"_postman_id": "fcc512d1-c0e8-49ce-b422-83e24ada1189",
+		"name": "Joone-Migrated",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12310744",
+		"_collection_link": "https://bold-moon-100639.postman.co/workspace/New-Team-Workspace~42431af4-2713-4d64-9d83-84b1c93ef025/collection/12310744-fcc512d1-c0e8-49ce-b422-83e24ada1189?action=share&source=collection_link&creator=12310744"
+	},
+	"item": [
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "api/user/address/customer-addresses",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Njc5LCJpYXQiOjE2NjY3ODg1NTUsImV4cCI6MTY2Njg3NDk1NX0.xA2_zUOc7maFrC6VbaAJxk9WrDMUmFTlZL9OpBFKX-U",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/user/address/customer-addresses",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"address",
+								"customer-addresses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/user/address/create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjc4MDkxMzQ2LCJleHAiOjE2NzgxNzc3NDZ9.CGYkdeZh3bdBMuEvBfdzoTrwWvAMOsPF7qdS744wVc0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address\": \"Test Address from Api -New\",\r\n    \"location\": \"planet01.net\",\r\n    \"is_primary\": false,\r\n    \"city_id\": 2\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/address/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"address",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/user/address/is_default",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzAxLCJpYXQiOjE2NjUwMzg4ODYsImV4cCI6MTY2NTEyNTI4Nn0.JS9YY1_Vt-06eeqI3STLnvQGgJe2EzcROBJpQD-u1i0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_id\": 753\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/address/is_default",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"address",
+								"is_default"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/user/address/update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTE0NCwiaWF0IjoxNjY2NzgyMTIxLCJleHAiOjE2NjY4Njg1MjF9.tqi3FyyN3g5Pdiziwm8pti8A0LcD0wMl97kM5SZlEok",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_id\": 1246,\r\n    \"address\": \"temp address\",\r\n    \"location\": \"qwerty\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/address/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"address",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/user/address/delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzIyLCJpYXQiOjE2NjQ1MzAyNzUsImV4cCI6MTY2NDYxNjY3NX0.2P_IzK0Zmsb8jNGge-xwdEbUrBBq7_IZ8oB9yrTkyAQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_id\": 755\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/address/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"address",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "order-lead",
+			"item": [
+				{
+					"name": "api/order/create",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjY5OTg0Mzg3LCJleHAiOjE2NzAwNzA3ODd9.DYtSOuh9oOQdEP6huyEFfhdT_KW6RMTQgRHaqRCOBXE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"address_id\": 32,\r\n    \"booking_date\": \"2025-01-02\",\r\n    \"service_date\": \"2025-01-03\",\r\n    \"service_time\": \"15:15:00\",\r\n    \"comment\": \"Testing from New-Api\",\r\n    \"amount\": 2500,\r\n    \"payment_to\": \"partner\",\r\n    \"data\": [\r\n        {\r\n            \"service_id\": 1,\r\n            \"quantity\": 1,\r\n            \"service_rate\": 700,\r\n            \"discount\": 0,\r\n            \"is_percentage\": 0,\r\n            \"is_discount\": 0,\r\n            \"bundle_id\": 24,\r\n            \"currency_id\": 1,\r\n            \"rate_to_pkr\": 300\r\n        },\r\n        {\r\n            \"service_id\": 2,\r\n            \"quantity\": 1,\r\n            \"service_rate\": 700,\r\n            \"discount\": 0,\r\n            \"is_percentage\": 0,\r\n            \"is_discount\": 0,\r\n            \"bundle_id\": 24,\r\n            \"currency_id\": 1,\r\n            \"rate_to_pkr\": 300\r\n        }\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/order/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/lead/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjkzMDU4OTQwLCJleHAiOjE2OTMxNDUzNDB9.ayy_7RD7_PZXnZjaJFOhEIqyTUSapmvyLazIsyCMD2Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ahmed\",\r\n    \"phone\": \"92346523178\",\r\n    \"email\": \"test@mail.com\",\r\n    \"date\": \"26-08-2023\",\r\n    \"time\": \"19:19:22\",\r\n    \"comment\": \"test comment\",\r\n    \"city_id\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/lead/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"lead",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/order/status-change",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjc3NjY3NzU2LCJleHAiOjE2Nzc3NTQxNTZ9.RA2omc2MOjCUOOrwZfAHH74dBBlYQt_obD6EBsOoLVg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"order_id\": \"4885\",\r\n    \"status\": \"4\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/order/status-change",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"status-change"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/order/customer-orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/order/customer-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"customer-orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/order/partner-orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "01941c25-7eec-772a-8ff8-df142402baf6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/order/partner-orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"order",
+								"partner-orders"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories-services",
+			"item": [
+				{
+					"name": "api/category/all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/category/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/category/all/salon",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/category/all/salon",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"all",
+								"salon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/category/all/spa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/category/all/spa",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"category",
+								"all",
+								"spa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/service/specialOffer",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/service/specialOffer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"specialOffer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/service/trending",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/service/trending",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"service",
+								"trending"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user detail",
+			"item": [
+				{
+					"name": "api/user/details/update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzAxLCJpYXQiOjE2NjUxNTI5MjMsImV4cCI6MTY2NTIzOTMyM30.lr4HjtgNGv7f3YHfQh4U0EUcxy7TGt_PXSwhkHO90n0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":           \"test application user22\",\r\n    \"email\":          \"application@mail.com\",\r\n    \"nic\":            \"42101-0000000-1\",\r\n    \"date_of_birth\":  \"1995-04-20\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/user/details/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"details",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "api/customer-authentication",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\": \"923452201069\",\r\n    \"fcm_token\": \"c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO\",\r\n    \"device_id\": \"6fb2c0a4-5034-4aec-b3a4-6cdbaf4e9dd9\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/customer-authentication",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"customer-authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/partner-authentication",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"phone\" : \"923452201069\",\r\n\"fcm_token\" : \"c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO\",\r\n\"device_id\": \"01941c25-3fbc-7ee2-a0f9-c225aedccc06\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/partner-authentication",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"partner-authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/customer-registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Test Order Joone Live 15-11-2022\",\r\n\"phone\" : \"923452201069\",\r\n\"fcm_token\" : \"c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO\",\r\n\"device_type\": \"android\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/customer-registration",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"customer-registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/partner-registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Test Partner\",\r\n    \"phone\": \"923452201069\",\r\n    \"fcm_token\": \"test partner token\",\r\n    \"device_type\": \"android\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/partner-registration",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"partner-registration"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "favorites",
+			"item": [
+				{
+					"name": "api/favorite/create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODg3LCJpYXQiOjE2NjU3NTA4NzQsImV4cCI6MTY2NTgzNzI3NH0.ZSAmOU4050zUNRCAgnlRN9FoemI2zP5K5yB31MEeLds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_id\":1\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/favorite/create",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/favorite/get",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/favorite/get",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/favorite/delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzAxLCJpYXQiOjE2NjU0MTIzMjYsImV4cCI6MTY2NTQ5ODcyNn0.2wLnH6lnuhs_p9LeZfOqhul_wt4gCLizXtIjcybpbvk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"service_id\":1\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/favorite/delete",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favorite",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "notification",
+			"item": [
+				{
+					"name": "api/notification/get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ODg3LCJpYXQiOjE2NjU3NTA4NzQsImV4cCI6MTY2NTgzNzI3NH0.ZSAmOU4050zUNRCAgnlRN9FoemI2zP5K5yB31MEeLds",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/notification/get",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"notification",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "api/city/cities",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzAxLCJpYXQiOjE2NjQ5NTMwMTQsImV4cCI6MTY2NTAzOTQxNH0.EM_yptOpN-VHCD7_1jX1XCkf0fQ9TxPGyTM8ZPTeHrs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/city/cities",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"city",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Area",
+			"item": [
+				{
+					"name": "api/area/areas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjkyMTA0MzE1LCJleHAiOjE2OTIxOTA3MTV9.MtqWZlwvg-4n1sMtrymD1CgfLh9LZkptSNLGybT50N4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city_id\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/area/areas",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"area",
+								"areas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rates",
+			"item": [
+				{
+					"name": "api/rates",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjkyMTA0MzE1LCJleHAiOjE2OTIxOTA3MTV9.MtqWZlwvg-4n1sMtrymD1CgfLh9LZkptSNLGybT50N4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city_id\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/rates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"rates"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bundles",
+			"item": [
+				{
+					"name": "api/bundles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiaWF0IjoxNjkyMTA0MzE1LCJleHAiOjE2OTIxOTA3MTV9.MtqWZlwvg-4n1sMtrymD1CgfLh9LZkptSNLGybT50N4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"city_id\": \"1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/bundles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"bundles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:5800",
+			"type": "string"
+		}
+	]
+}

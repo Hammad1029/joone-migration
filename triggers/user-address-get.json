@@ -1,0 +1,19 @@
+{
+    "name": "user-address-get",
+    "description": "user-address-get",
+    "startState": 100,
+    "rules": ["verify-token", "user-address-get"],
+    "branchFlows": {
+      "100": {
+        "rule": "verify-token",
+        "states": {
+          "0": 200
+        }
+      },
+      "200": {
+        "rule": "user-address-get",
+        "states": {}
+      }
+    }
+  }
+  

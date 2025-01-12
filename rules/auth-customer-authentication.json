@@ -1,0 +1,148 @@
+{
+  "name": "auth customer authentication",
+  "description": "auth customer authentication",
+  "pre": [
+    {
+      "resolveType": "query",
+      "resolveData": {
+        "queryString": "update customer_details set fcm_token=? where phone = ? and device_id = ?;",
+
+        "named": false,
+        "namedParameters": {},
+        "positionalParameters": [
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".fcm_token",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".phone",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".device_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "access_token": {
+          "resolveType": "uuid",
+          "resolveData": {}
+        },
+        "customer": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "user",
+                "where": {
+                  "template": "user.phone = ? and user.device_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".phone",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    },
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".device_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "message": "Customer logged in successfully!",
+        "status": true
+      }
+    },
+    {
+      "resolveType": "setCache",
+      "resolveData": {
+        "key": {
+          "resolveType": "stringInterpolation",
+          "resolveData": {
+            "template": "token-$param",
+            "parameters": [
+              {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".access_token",
+                  "input": {
+                    "resolveType": "getRes",
+                    "resolveData": {}
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "value": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".customer.id",
+            "input": {
+              "resolveType": "getRes",
+              "resolveData": {}
+            }
+          }
+        },
+        "ttl": 86400
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

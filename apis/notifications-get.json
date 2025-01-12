@@ -1,0 +1,18 @@
+{
+  "name": "notifications-get",
+  "path": "/api/notification/get",
+  "method": "GET",
+  "description": "notifications-get",
+  "request": {},
+  "preConfig": {},
+  "triggers": [
+    {
+      "if": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      },
+      "trigger": "notifications-get"
+    }
+  ]
+}

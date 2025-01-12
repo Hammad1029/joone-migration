@@ -1,0 +1,16 @@
+{
+  "name": "cities-get-all-cities",
+  "path": "/api/city/cities",
+  "method": "GET",
+  "description": "cities-get-all-cities",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "cities-get-all-cities"
+  }]
+}

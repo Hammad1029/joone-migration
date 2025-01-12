@@ -1,0 +1,102 @@
+[
+  {
+    "trigger": "000",
+    "internal": true,
+    "responseHTTPStatus": 200,
+    "useBody": true,
+    "responseBody": {
+      "responseCode": "000",
+      "responseDescription": "success"
+    }
+  },
+  {
+    "trigger": "010",
+    "internal": true,
+    "responseHTTPStatus": 200,
+    "useBody": true,
+    "responseBody": {
+      "responseCode": "010",
+      "responseDescription": "exhausted"
+    }
+  },
+  {
+    "trigger": "400",
+    "internal": true,
+    "responseHTTPStatus": 400,
+    "useBody": true,
+    "responseBody": {
+      "responseCode": "400",
+      "responseDescription": "bad request"
+    }
+  },
+  {
+    "trigger": "404",
+    "internal": true,
+    "responseHTTPStatus": 404,
+    "useBody": true,
+    "responseBody": {
+      "responseCode": "404",
+      "responseDescription": "not found"
+    }
+  },
+  {
+    "trigger": "500",
+    "internal": true,
+    "responseHTTPStatus": 500,
+    "useBody": true,
+    "responseBody": {
+      "responseCode": "500",
+      "responseDescription": "server error"
+    }
+  },
+  {
+    "trigger": "000",
+    "internal": false,
+    "responseHTTPStatus": 200,
+    "useBody": false,
+    "responseBody": {}
+  },
+  {
+    "trigger": "010",
+    "internal": false,
+    "responseHTTPStatus": 200,
+    "useBody": false,
+    "responseBody": {}
+  },
+  {
+    "trigger": "400",
+    "internal": false,
+    "responseHTTPStatus": 400,
+    "useBody": true,
+    "responseBody": {
+      "status": false,
+      "errors": {
+        "resolveType": "getErrors",
+        "resolveData": {}
+      }
+    }
+  },
+  {
+    "trigger": "404",
+    "internal": false,
+    "responseHTTPStatus": 404,
+    "useBody": true,
+    "responseBody": {
+      "status": "404",
+      "message": "API not found"
+    }
+  },
+  {
+    "trigger": "500",
+    "internal": false,
+    "responseHTTPStatus": 500,
+    "useBody": true,
+    "responseBody": {
+      "status": false,
+      "errors": {
+        "resolveType": "getErrors",
+        "resolveData": {}
+      }
+    }
+  }
+]

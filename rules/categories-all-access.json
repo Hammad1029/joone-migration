@@ -1,0 +1,67 @@
+{
+  "name": "categories-all-access",
+  "description": "categories-all-access",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "status": true,
+        "message": "Data fetched successfully!",
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "categories",
+                "where": {
+                  "template": "categories.parent_id is null",
+                  "values": []
+                },
+                "populate": [
+                  {
+                    "model": "categories",
+                    "as": "sub_categories",
+                    "populate": [
+                      {
+                        "model": "services",
+                        "as": "services",
+                        "populate": []
+                      }
+                    ]
+                  },
+                  {
+                    "model": "services",
+                    "as": "services",
+                    "populate": []
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

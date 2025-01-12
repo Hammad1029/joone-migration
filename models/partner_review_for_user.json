@@ -1,0 +1,23 @@
+{
+  "name": "partner_review_for_user",
+  "table": "partner_order_reviews",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "booking_id", "as": "booking_id", "dataType": "number" },
+    { "column": "review", "as": "review", "dataType": "string" },
+    { "column": "rating", "as": "rating", "dataType": "number" },
+    {
+      "column": "service_person_detail_id",
+      "as": "service_person_detail_id",
+      "dataType": "number"
+    },
+    {
+      "column": "customer_detail_id",
+      "as": "customer_detail_id",
+      "dataType": "number"
+    },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

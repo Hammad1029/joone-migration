@@ -1,0 +1,12 @@
+{
+  "name": "categories-service-special-offer",
+  "description": "categories-service-special-offer",
+  "startState": 100,
+  "rules": ["categories-service-special-offer"],
+  "branchFlows": {
+    "100": {
+      "rule": "categories-service-special-offer",
+      "states": {}
+    }
+  }
+}

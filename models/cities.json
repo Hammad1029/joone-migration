@@ -1,0 +1,10 @@
+{
+  "name": "cities",
+  "table": "cities",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "status", "as": "status", "dataType": "number" }
+  ]
+}

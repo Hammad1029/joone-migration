@@ -1,0 +1,678 @@
+{
+  "name": "order-update-status",
+  "description": "order-update-status",
+  "pre": [
+    {
+      "resolveType": "query",
+      "resolveData": {
+        "queryString": "update bookings set booking_status = ? where id = ?;",
+
+        "named": false,
+        "namedParameters": {},
+        "positionalParameters": [
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".status",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".order_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resolveType": "orm",
+      "resolveData": {
+        "operation": "insert",
+        "model": "order_status",
+        "columns": {
+          "booking_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".order_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "user_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".user_id",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          },
+          "status": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".status",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "created_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          },
+          "updated_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "order_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "order",
+                "where": {
+                  "template": "order.order_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "notification": {
+          "title": "JustJoone"
+        },
+        "notification_data": {
+          "type": "order",
+          "body": {
+            "resolveType": "stringInterpolation",
+            "resolveData": {
+              "template": "{\"order_id\" : \"$param\"}",
+              "parameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".order_data.id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "notification_customer_id": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".order_data.customer_id",
+            "input": {
+              "resolveType": "getStore",
+              "resolveData": {}
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "orm",
+            "resolveData": {
+              "operation": "insert",
+              "model": "order_payments",
+              "columns": {
+                "service_person_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".user_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "booking_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".order_id",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "partner_commission": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".commission_percentage",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "order_amount": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".amount",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "partner_amount": {
+                  "resolveType": "arithmetic",
+                  "resolveData": {
+                    "group": true,
+                    "operation": "/",
+                    "operators": [
+                      {
+                        "value": null,
+                        "group": true,
+                        "operation": "*",
+                        "operators": [
+                          {
+                            "group": false,
+                            "value": {
+                              "resolveType": "jq",
+                              "resolveData": {
+                                "query": ".amount",
+                                "input": {
+                                  "resolveType": "getReq",
+                                  "resolveData": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "group": false,
+                            "value": {
+                              "resolveType": "jq",
+                              "resolveData": {
+                                "query": ".commission_percentage",
+                                "input": {
+                                  "resolveType": "getReq",
+                                  "resolveData": {}
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "group": false,
+                        "value": {
+                          "resolveType": "const",
+                          "resolveData": {
+                            "value": 100
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "joone_amount": {
+                  "resolveType": "arithmetic",
+                  "resolveData": {
+                    "group": true,
+                    "operation": "/",
+                    "operators": [
+                      {
+                        "value": null,
+                        "group": true,
+                        "operation": "*",
+                        "operators": [
+                          {
+                            "group": false,
+                            "value": {
+                              "resolveType": "jq",
+                              "resolveData": {
+                                "query": ".amount",
+                                "input": {
+                                  "resolveType": "getReq",
+                                  "resolveData": {}
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "group": true,
+                            "operation": "-",
+                            "operators": [
+                              {
+                                "group": false,
+                                "value": {
+                                  "resolveType": "const",
+                                  "resolveData": {
+                                    "value": 100
+                                  }
+                                }
+                              },
+                              {
+                                "group": false,
+                                "value": {
+                                  "resolveType": "jq",
+                                  "resolveData": {
+                                    "query": ".commission_percentage",
+                                    "input": {
+                                      "resolveType": "getReq",
+                                      "resolveData": {}
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "group": false,
+                        "value": {
+                          "resolveType": "const",
+                          "resolveData": {
+                            "value": 100
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "payment_type_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".order_data.payment_type_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "payment_to": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".order_data.payment_to",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              },
+              "created_at": {
+                "resolveType": "dateFunc",
+                "resolveData": {
+                  "input": {
+                    "resolveType": "dateInput",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "updated_at": {
+                "resolveType": "dateFunc",
+                "resolveData": {
+                  "input": {
+                    "resolveType": "dateInput",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          },
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              ".notification.body": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "Your order ( $param ) is completed",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_data.booking_code",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".status",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 7
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "update bookings set service_person_id = null where id = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".order_id",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ],
+        "return": 2,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".status",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 8
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              ".notification.body": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "Your order ( $param ) is initiated",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_data.booking_code",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".status",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 4
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              ".notification.body": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "Your partner for order ( $param ) has arrived",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_data.booking_code",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".status",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 5
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              ".notification.body": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "Your order ( $param ) is completed",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_data.booking_code",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".status",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 6
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Order Status is changed Successfully!",
+        "status": true,
+        "data": {
+          "order": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".order_data",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ]
+}

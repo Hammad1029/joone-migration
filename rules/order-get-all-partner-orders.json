@@ -1,0 +1,139 @@
+{
+  "name": "order-get-all-partner-orders",
+  "description": "order-get-all-partner-orders",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Data fetched successfully!",
+        "status": true,
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "order",
+                "where": {
+                  "template": "order.service_person_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "populate": [
+                  {
+                    "model": "user",
+                    "as": "customer",
+                    "populate": [],
+                    "project": [
+                      {
+                        "column": "name",
+                        "as": "name"
+                      },
+                      {
+                        "column": "phone",
+                        "as": "phone"
+                      },
+                      {
+                        "column": "nic",
+                        "as": "nic"
+                      }
+                    ]
+                  },
+                  {
+                    "model": "user_addresses",
+                    "as": "address",
+                    "project": [
+                      {
+                        "column": "address",
+                        "as": "address"
+                      },
+                      {
+                        "column": "location",
+                        "as": "location"
+                      },
+                      {
+                        "column": "city_id",
+                        "as": "city_id"
+                      }
+                    ]
+                  },
+                  {
+                    "model": "order_details",
+                    "as": "order_detail",
+                    "where": {
+                      "template": "order_order_detail.deleted_at is null",
+                      "values": []
+                    },
+                    "populate": [
+                      {
+                        "model": "services",
+                        "as": "services",
+                        "populate": [],
+                        "project": [
+                          {
+                            "column": "slug",
+                            "as": "slug"
+                          },
+                          {
+                            "column": "amount",
+                            "as": "amount"
+                          }
+                        ]
+                      },
+                      {
+                        "model": "bundles",
+                        "as": "bundles",
+                        "populate": [],
+                        "project": [
+                          {
+                            "column": "name",
+                            "as": "name"
+                          },
+                          {
+                            "column": "description",
+                            "as": "description"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

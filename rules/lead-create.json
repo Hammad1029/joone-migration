@@ -1,0 +1,140 @@
+{
+  "name": "lead-create",
+  "description": "lead-create",
+  "pre": [
+    {
+      "resolveType": "orm",
+      "resolveData": {
+        "operation": "insert",
+        "model": "leads",
+        "columns": {
+          "name": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".name",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "phone": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".phone",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "email": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".email",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "customer_comment": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".comment",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "city_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".city_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "lead_date": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".date",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "lead_time": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".time",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "source": {
+            "resolveType": "const",
+            "resolveData": {
+              "value": 5
+            }
+          },
+          "status": {
+            "resolveType": "const",
+            "resolveData": {
+              "value": 0
+            }
+          },
+          "created_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          },
+          "updated_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Lead was created successfully!",
+        "status": true
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

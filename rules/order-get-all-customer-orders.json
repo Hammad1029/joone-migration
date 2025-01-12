@@ -1,0 +1,123 @@
+{
+  "name": "order-get-all-customer-orders",
+  "description": "order-get-all-customer-orders",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Data fetched successfully!",
+        "status": true,
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "order",
+                "project": [],
+                "where": {
+                  "template": "order.customer_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "populate": [
+                  {
+                    "model": "partner",
+                    "as": "partner",
+                    "populate": [],
+                    "project": [
+                      {
+                        "column": "name",
+                        "as": "name",
+                        "dataType": "asd"
+                      },
+                      {
+                        "column": "phone",
+                        "as": "phone"
+                      },
+                      {
+                        "column": "nic",
+                        "as": "nic"
+                      }
+                    ]
+                  },
+                  {
+                    "model": "order_details",
+                    "as": "order_detail",
+                    "where": {
+                      "template": "order_order_detail.deleted_at is null",
+                      "values": []
+                    },
+                    "populate": [
+                      {
+                        "model": "services",
+                        "as": "services",
+                        "populate": [],
+                        "project": [
+                          {
+                            "column": "slug",
+                            "as": "slug"
+                          },
+                          {
+                            "column": "amount",
+                            "as": "amount"
+                          }
+                        ]
+                      },
+                      {
+                        "model": "bundles",
+                        "as": "bundles",
+                        "populate": [],
+                        "project": [
+                          {
+                            "column": "name",
+                            "as": "name"
+                          },
+                          {
+                            "column": "description",
+                            "as": "description"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

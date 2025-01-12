@@ -1,0 +1,503 @@
+{
+  "name": "order-create",
+  "description": "order-create",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "current_year": {
+          "resolveType": "dateFunc",
+          "resolveData": {
+            "input": {
+              "resolveType": "dateInput",
+              "resolveData": {}
+            },
+            "format": "YYYY"
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "orders": {
+          "resolveType": "orm",
+          "resolveData": {
+            "operation": "select",
+            "model": "order",
+            "where": {
+              "template": "order.booking_date like ?",
+              "values": [
+                {
+                  "resolveType": "stringInterpolation",
+                  "resolveData": {
+                    "template": "%$param%",
+                    "parameters": [
+                      {
+                        "resolveType": "jq",
+                        "resolveData": {
+                          "query": ".current_year",
+                          "input": {
+                            "resolveType": "getStore",
+                            "resolveData": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "project": [
+              {
+                "column": "booking_code",
+                "as": "booking_code"
+              }
+            ],
+            "populate": [],
+            "orderBy": "order.id desc",
+            "limit": 1
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              "booking_code": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "$param-1",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".current_year",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "return": 0,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".results | length",
+                  "input": {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".orders",
+                      "input": {
+                        "resolveType": "getStore",
+                        "resolveData": {}
+                      }
+                    }
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 0
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setStore",
+          "resolveData": {
+            "booking_code": {
+              "resolveType": "stringInterpolation",
+              "resolveData": {
+                "template": "$param-$param",
+                "parameters": [
+                  {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".current_year",
+                      "input": {
+                        "resolveType": "getStore",
+                        "resolveData": {}
+                      }
+                    }
+                  },
+                  {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".orders[0].booking_code | split(\"-\")[1] | tonumber + 1",
+                      "input": {
+                        "resolveType": "getStore",
+                        "resolveData": {}
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "address": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "user_addresses",
+                "where": {
+                  "template": "user_addresses.id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".address_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "project": [],
+                "populate": []
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "new_order": {
+          "resolveType": "orm",
+          "resolveData": {
+            "operation": "insert",
+            "model": "order",
+            "columns": {
+              "customer_id": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".user_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "booking_code": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".booking_code",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "address_id": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".address_id",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "booking_date": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".booking_date",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "service_date": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".service_date",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "service_time": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".service_time",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "booking_city": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".address.city_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "area_id": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".address.area_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "payment_type_id": 1,
+              "booking_status": 0,
+              "booking_source": 6,
+              "payment_to": "partner",
+              "comment": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": "comment",
+                  "input": {
+                    "resolveType": "getReq",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "created_at": {
+                "resolveType": "dateFunc",
+                "resolveData": {}
+              },
+              "updated_at": {
+                "resolveType": "dateFunc",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "forEach",
+      "resolveData": {
+        "input": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".data",
+            "input": {
+              "resolveType": "getReq",
+              "resolveData": {}
+            }
+          }
+        },
+        "do": [
+          {
+            "resolveType": "orm",
+            "resolveData": {
+              "operation": "insert",
+              "model": "order_details",
+              "columns": {
+                "booking_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".new_order.results[0].id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "service_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.service_id",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "quantity": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.quantity",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "service_rate": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.service_rate",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "discount": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.discount",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "is_percentage": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.is_percentage",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "is_discount": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.is_discount",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "bundle_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.bundle_id",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "currency_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.currency_id",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "rate_to_pkr": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".element.rate_to_pkr",
+                    "input": {
+                      "resolveType": "getIter",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "created_at": {
+                  "resolveType": "dateFunc",
+                  "resolveData": {}
+                },
+                "updated_at": {
+                  "resolveType": "dateFunc",
+                  "resolveData": {}
+                }
+              }
+            }
+          },
+          {
+            "resolveType": "orm",
+            "resolveData": {
+              "operation": "insert",
+              "model": "order_status",
+              "columns": {
+                "booking_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".new_order.results[0].id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "status": 0,
+                "user_id": {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".user_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                "created_at": {
+                  "resolveType": "dateFunc",
+                  "resolveData": {}
+                },
+                "updated_at": {
+                  "resolveType": "dateFunc",
+                  "resolveData": {}
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ]
+}

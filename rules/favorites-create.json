@@ -1,0 +1,78 @@
+{
+  "name": "favorites-create",
+  "description": "favorites-create",
+  "pre": [
+    {
+      "resolveType": "orm",
+      "resolveData": {
+        "operation": "insert",
+        "model": "favorites",
+        "columns": {
+          "service_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".service_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "customer_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".user_id",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          },
+          "created_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          },
+          "updated_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Service add into the favorites!",
+        "status": true
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

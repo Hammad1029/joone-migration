@@ -1,0 +1,17 @@
+{
+  "name": "auth-partner-authentication",
+  "path": "/api/partner-authentication",
+  "method": "POST",
+  "description": "description",
+  "request": {},
+  "triggers": [
+    {
+      "if": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      },
+      "trigger": "auth partner authentication"
+    }
+  ]
+}

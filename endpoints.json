@@ -1,0 +1,165 @@
+[
+  {
+    "method": "GET",
+    "endpoint": "/api/user/address/customer-addresses",
+    "body": {}
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/user/address/create",
+    "body": {
+      "address": "Test Address from Api -New",
+      "location": "planet01.net",
+      "is_primary": false,
+      "city_id": 2
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/user/address/is_default",
+    "body": { "address_id": 753 }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/user/address/update",
+    "body": {
+      "address_id": 1246,
+      "address": "temp address",
+      "location": "qwerty"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/user/address/delete",
+    "body": { "address_id": 755 }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/order/create",
+    "body": {
+      "address_id": 32,
+      "booking_date": "2025-01-02",
+      "service_date": "2025-01-03",
+      "service_time": "15:15:00",
+      "comment": "Testing from New-Api",
+      "amount": 2500,
+      "payment_to": "partner",
+      "data": [
+        {
+          "service_id": 1,
+          "quantity": 1,
+          "service_rate": 700,
+          "discount": 0,
+          "is_percentage": 0,
+          "is_discount": 0,
+          "bundle_id": 24,
+          "currency_id": 1,
+          "rate_to_pkr": 300
+        },
+        {
+          "service_id": 2,
+          "quantity": 1,
+          "service_rate": 700,
+          "discount": 0,
+          "is_percentage": 0,
+          "is_discount": 0,
+          "bundle_id": 24,
+          "currency_id": 1,
+          "rate_to_pkr": 300
+        }
+      ]
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/lead/create",
+    "body": {
+      "name": "ahmed",
+      "phone": "92346523178",
+      "email": "test@mail.com",
+      "date": "26-08-2023",
+      "time": "19:19:22",
+      "comment": "test comment",
+      "city_id": "1"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/order/status-change",
+    "body": { "order_id": "4885", "status": "4" }
+  },
+  { "method": "GET", "endpoint": "/api/order/customer-orders", "body": {} },
+  { "method": "GET", "endpoint": "/api/order/partner-orders", "body": {} },
+  { "method": "GET", "endpoint": "/api/category/all", "body": {} },
+  { "method": "GET", "endpoint": "/api/category/all/salon", "body": {} },
+  { "method": "GET", "endpoint": "/api/category/all/spa", "body": {} },
+  { "method": "GET", "endpoint": "/api/service/specialOffer", "body": {} },
+  { "method": "GET", "endpoint": "/api/service/trending", "body": {} },
+  {
+    "method": "POST",
+    "endpoint": "/api/user/details/update",
+    "body": {
+      "name": "test application user22",
+      "email": "application@mail.com",
+      "nic": "42101-0000000-1",
+      "date_of_birth": "1995-04-20"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/customer-authentication",
+    "body": {
+      "phone": "923452201069",
+      "fcm_token": "c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO",
+      "device_id": "6fb2c0a4-5034-4aec-b3a4-6cdbaf4e9dd9"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/partner-authentication",
+    "body": {
+      "phone": "923452201069",
+      "fcm_token": "c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO",
+      "device_id": "01941c25-3fbc-7ee2-a0f9-c225aedccc06"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/customer-registration",
+    "body": {
+      "name": "Test Order Joone Live 15-11-2022",
+      "phone": "923452201069",
+      "fcm_token": "c5gdjqeRSfyaFbqxcEi4he:APA91bH7_1MrQLsURQ34k5zRVuK6Vd0-0YMYubdAc-rXhVL8kNqLb8xoEYretV9BwJ7fZYvSMO5_bCw5l64Ao64yF6yMvRqJLh5FthEtc383ORBNwboEoaswSAgvJch7KMcqfljbianO",
+      "device_type": "android"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/partner-registration",
+    "body": {
+      "name": "Test Partner",
+      "phone": "923452201069",
+      "fcm_token": "test partner token",
+      "device_type": "android"
+    }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/favorite/create",
+    "body": { "service_id": 1 }
+  },
+  {
+    "method": "POST",
+    "endpoint": "/api/favorite/delete",
+    "body": { "service_id": 1 }
+  },
+  { "method": "GET", "endpoint": "/api/notification/get", "body": {} },
+  { "method": "GET", "endpoint": "/api/city/cities", "body": {} },
+  {
+    "method": "GET",
+    "endpoint": "/api/area/areas",
+    "body": { "city_id": "1" }
+  },
+  { "method": "GET", "endpoint": "/api/rates", "body": { "city_id": "1" } },
+  { "method": "GET", "endpoint": "/api/bundles", "body": { "city_id": "1" } }
+]

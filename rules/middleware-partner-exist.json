@@ -1,0 +1,271 @@
+{
+  "name": "partner-exists",
+  "description": "middleware rule for partner exists",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "partner_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "partner",
+                "where": {
+                  "template": "partner.phone = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": {
+                          "resolveType": "const",
+                          "resolveData": {
+                            "value": ".phone"
+                          }
+                        },
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "update service_person_details set name = ?, fcm_token = ?, device_type = ?, device_id = ? where phone = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".name",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".fcm_token",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".device_type",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "uuid",
+                  "resolveData": {}
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".phone",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              "partner_data": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".results[0]",
+                  "input": {
+                    "resolveType": "orm",
+                    "resolveData": {
+                      "operation": "select",
+                      "model": "partner",
+                      "where": {
+                        "template": "partner.phone = ?",
+                        "values": [
+                          {
+                            "resolveType": "jq",
+                            "resolveData": {
+                              "query": {
+                                "resolveType": "const",
+                                "resolveData": {
+                                  "value": ".phone"
+                                }
+                              },
+                              "input": {
+                                "resolveType": "getReq",
+                                "resolveData": {}
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              "token": {
+                "resolveType": "uuid",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "setCache",
+            "resolveData": {
+              "key": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "token-$param",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".token",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "value": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data.id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "ttl": 86400
+            }
+          },
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "access_token": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".token",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "partner": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "message": "The number already exists, device registered successfully",
+              "status": true
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "ne",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "message": "Number not registered please contact the administrator for registration.",
+            "status": false,
+            "access_token": {
+              "resolveType": "uuid",
+              "resolveData": {}
+            },
+            "partner": {}
+          }
+        },
+        {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

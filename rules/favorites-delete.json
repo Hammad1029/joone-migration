@@ -1,0 +1,62 @@
+{
+  "name": "favorites-delete",
+  "description": "favorites-delete",
+  "pre": [
+    {
+      "resolveType": "query",
+      "resolveData": {
+        "queryString": "delete from favorites where service_id = ? and customer_id = ?;",
+
+        "named": false,
+        "namedParameters": {},
+        "positionalParameters": [
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".service_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".user_id",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Favorite delete successfully!",
+        "status": true
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

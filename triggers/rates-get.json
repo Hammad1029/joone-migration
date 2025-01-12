@@ -1,0 +1,12 @@
+{
+  "name": "rates-get",
+  "description": "rates-get",
+  "startState": 100,
+  "rules": ["rates-get"],
+  "branchFlows": {
+    "100": {
+      "rule": "rates-get",
+      "states": {}
+    }
+  }
+}

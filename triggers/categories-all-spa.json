@@ -1,0 +1,12 @@
+{
+  "name": "categories-all-spa",
+  "description": "categories-all-spa",
+  "startState": 100,
+  "rules": ["categories-all-spa"],
+  "branchFlows": {
+    "100": {
+      "rule": "categories-all-spa",
+      "states": {}
+    }
+  }
+}

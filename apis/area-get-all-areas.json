@@ -1,0 +1,16 @@
+{
+  "name": "get-all-areas",
+  "path": "/api/area/areas",
+  "method": "GET",
+  "description": "get-all-areas",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "get-all-areas"
+  }]
+}

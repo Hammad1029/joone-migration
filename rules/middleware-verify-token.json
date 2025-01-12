@@ -1,0 +1,90 @@
+{
+  "name": "verify-token",
+  "description": "verify-token",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "user_id": {
+          "resolveType": "getCache",
+          "resolveData": {
+            "key": {
+              "resolveType": "stringInterpolation",
+              "resolveData": {
+                "template": "token-$param",
+                "parameters": [
+                  {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".Authorization",
+                      "input": {
+                        "resolveType": "headers",
+                        "resolveData": {}
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Unauthorized"
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".user_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

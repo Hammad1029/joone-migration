@@ -1,0 +1,200 @@
+{
+  "name": "auth partner registration",
+  "description": "auth partner registration",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "partner_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "insert",
+                "model": "partner",
+                "columns": {
+                  "phone": {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".phone",
+                      "input": {
+                        "resolveType": "getReq",
+                        "resolveData": {}
+                      }
+                    }
+                  },
+                  "name": {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": "name",
+                      "input": {
+                        "resolveType": "getReq",
+                        "resolveData": {}
+                      }
+                    }
+                  },
+                  "fcm_token": {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".fcm_token",
+                      "input": {
+                        "resolveType": "getReq",
+                        "resolveData": {}
+                      }
+                    }
+                  },
+                  "device_type": {
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".device_type",
+                      "input": {
+                        "resolveType": "getReq",
+                        "resolveData": {}
+                      }
+                    }
+                  },
+                  "device_id": {
+                    "resolveType": "uuid",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              "token": {
+                "resolveType": "uuid",
+                "resolveData": {}
+              }
+            }
+          },
+          {
+            "resolveType": "setCache",
+            "resolveData": {
+              "key": {
+                "resolveType": "stringInterpolation",
+                "resolveData": {
+                  "template": "token-$param",
+                  "parameters": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".token",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "value": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data.id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "ttl": 86400
+            }
+          },
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "access_token": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".token",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "partner": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".partner_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "message": "Partner was registered successfully!",
+              "status": true
+            }
+          }
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".customer_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "ne",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "access_token": "",
+            "customer": {},
+            "message": "Partner registration failed!",
+            "status": false
+          }
+        },
+        {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

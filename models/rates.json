@@ -1,0 +1,15 @@
+{
+  "name": "rates",
+  "table": "rates",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "city_id", "as": "city_id", "dataType": "number" },
+    { "column": "service_id", "as": "service_id", "dataType": "number" },
+    { "column": "bundle_id", "as": "bundle_id", "dataType": "number" },
+    { "column": "currency_id", "as": "currency_id", "dataType": "number" },
+    { "column": "rate_to_pkr", "as": "rate_to_pkr", "dataType": "number" },
+    { "column": "amount", "as": "amount", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" }
+  ]
+}

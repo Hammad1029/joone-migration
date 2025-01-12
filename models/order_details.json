@@ -1,0 +1,21 @@
+{
+  "name": "order_details",
+  "table": "booking_details",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "booking_id", "as": "booking_id", "dataType": "number" },
+    { "column": "service_id", "as": "service_id", "dataType": "number" },
+    { "column": "quantity", "as": "quantity", "dataType": "number" },
+    { "column": "service_rate", "as": "service_rate", "dataType": "number" },
+    { "column": "discount", "as": "discount", "dataType": "number" },
+    { "column": "is_percentage", "as": "is_percentage", "dataType": "number" },
+    { "column": "is_discount", "as": "is_discount", "dataType": "number" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" },
+    { "column": "deleted_at", "as": "deleted_at", "dataType": "string" },
+    { "column": "rate_to_pkr", "as": "rate_to_pkr", "dataType": "number" },
+    { "column": "currency_id", "as": "currency_id", "dataType": "number" },
+    { "column": "bundle_id", "as": "bundle_id", "dataType": "number" }
+  ]
+}

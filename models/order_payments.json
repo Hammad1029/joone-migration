@@ -1,0 +1,34 @@
+{
+  "name": "order_payments",
+  "table": "order_payments",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    {
+      "column": "service_person_id",
+      "as": "service_person_id",
+      "dataType": "number"
+    },
+    { "column": "booking_id", "as": "booking_id", "dataType": "number" },
+    {
+      "column": "partner_commission",
+      "as": "partner_commission",
+      "dataType": "number"
+    },
+    { "column": "order_amount", "as": "order_amount", "dataType": "number" },
+    {
+      "column": "partner_amount",
+      "as": "partner_amount",
+      "dataType": "number"
+    },
+    { "column": "joone_amount", "as": "joone_amount", "dataType": "number" },
+    { "column": "payment_to", "as": "payment_to", "dataType": "string" },
+    {
+      "column": "payment_type_id",
+      "as": "payment_type_id",
+      "dataType": "number"
+    },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

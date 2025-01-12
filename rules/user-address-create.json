@@ -1,0 +1,118 @@
+{
+  "name": "user-address-create",
+  "description": "user-address-create",
+  "pre": [
+    {
+      "resolveType": "orm",
+      "resolveData": {
+        "operation": "insert",
+        "model": "user_addresses",
+        "columns": {
+          "address": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".address",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "location": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".location",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "customer_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".user_id",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          },
+          "is_primary": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".is_primary",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "city_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".city_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "area_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".area_id",
+              "input": {
+                "resolveType": "getReq",
+                "resolveData": {}
+              }
+            }
+          },
+          "created_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          },
+          "updated_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "message": "Address added successfully!",
+        "status": true
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "user-address-delete",
+    "description": "user-address-delete",
+    "startState": 100,
+    "rules": ["verify-token", "user-address-delete"],
+    "branchFlows": {
+      "100": {
+        "rule": "verify-token",
+        "states": {
+          "0": 200
+        }
+      },
+      "200": {
+        "rule": "user-address-delete",
+        "states": {}
+      }
+    }
+  }
+  

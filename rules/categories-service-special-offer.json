@@ -1,0 +1,64 @@
+{
+  "name": "categories-service-special-offer",
+  "description": "categories-service-special-offer",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "services": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "services",
+                "where": {
+                  "template":"services.status = 1 and services.is_special_offer = 1",
+                  "values":[]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "status": true,
+            "message": "Data fetched successfully!",
+            "data": {
+              "resolveType": "jq",
+              "resolveData": {
+                "query": ".results",
+                "input": {
+                  "resolveType": "getStore",
+                  "resolveData": {}
+                }
+              }
+            }
+          }
+        },
+        {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "name": "push-notification",
+  "description": "push-notification",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "user_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "user",
+                "where": {
+                  "template": "user.id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                },
+                "orderBy": "",
+                "limit": 0
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "notification_response": {
+          "resolveType": "api",
+          "resolveData": {
+            "url": {
+              "resolveType": "const",
+              "resolveData": {
+                "value": "https://fcm.googleapis.com/fcm/send"
+              }
+            },
+            "method": "POST",
+            "headers": {
+              "Content-Type": "application/json",
+              "Authorization": "key=AAAAxFQZ9Z4:APA91bHEuFnKxZoeaz47_OLovKP1Pft7P4BcV_dOoDj63dLAnYQ3pHFkgaijqTFkzT5ifczjtIIBU7Ai3X4KWWFaduhKQ0MUJ3H4lAreaYvFJiTWoqG0St_wfktO-JzFibhGjGMqz25e"
+            },
+            "body": {
+              "to": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".user_data.fcm-token",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "notification": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".notification",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "data": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".notification_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              }
+            },
+            "async": false,
+            "timeout": 0
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "orm",
+      "resolveData": {
+        "operation": "insert",
+        "model": "notifications",
+        "columns": {
+          "customer_id": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".notification_customer_id",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          },
+          "response": {
+            "resolveType": "jq",
+            "resolveData": {
+              "query": ".notification_response.Response",
+              "input": {
+                "resolveType": "getStore",
+                "resolveData": {}
+              }
+            }
+          },
+          "body": {
+            "resolveType": "cast",
+            "resolveData": {
+              "input": {
+                "query": ".notification",
+                "input": {
+                  "resolveType": "getStore",
+                  "resolveData": {}
+                }
+              },
+              "to": "string"
+            }
+          },
+          "data": {
+            "resolveType": "cast",
+            "resolveData": {
+              "input": {
+                "query": ".notification_data",
+                "input": {
+                  "resolveType": "getStore",
+                  "resolveData": {}
+                }
+              },
+              "to": "string"
+            }
+          },
+          "created_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          },
+          "updated_at": {
+            "resolveType": "dateFunc",
+            "resolveData": {
+              "input": {
+                "resolveType": "dateInput",
+                "resolveData": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "resolveType": "log",
+      "resolveData": {
+        "logData": "notification send and logged in db",
+        "logType": "info"
+      }
+    }
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

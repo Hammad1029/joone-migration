@@ -1,0 +1,16 @@
+{
+  "name": "order-update-status",
+  "path": "/api/order/status-change",
+  "method": "POST",
+  "description": "order-update-status",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "order-update-status"
+  }]
+}

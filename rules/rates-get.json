@@ -1,0 +1,48 @@
+{
+  "name": "rates-get",
+  "description": "rates-get",
+  "pre": [
+    {
+      "resolveType": "setRes",
+      "resolveData": {
+        "status": true,
+        "message": "Data fetched successfully!",
+        "data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "rates",
+                "where": {
+                  "template": "rates.status = 1",
+                  "values": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+   {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+  ],
+  "switch": {
+    "cases": [],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

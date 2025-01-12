@@ -1,0 +1,18 @@
+{
+  "name": "user-address-set-default",
+  "description": "user-address-set-default",
+  "startState": 100,
+  "rules": ["verify-token", "user-address-set-default"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "user-address-set-default",
+      "states": {}
+    }
+  }
+}

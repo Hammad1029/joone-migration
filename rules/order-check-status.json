@@ -1,0 +1,319 @@
+{
+  "name": "order-check-status",
+  "description": "order-check-status",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "order_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "order",
+                "where": {
+                  "template": "order.order_id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".order_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Order not found",
+              "status": false,
+              "data": null
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 2,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Order status not changed, order is already completed.",
+              "status": true,
+              "data": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          },
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              "notification": {
+                "title": "JustJoone",
+                "body": {
+                  "resolveType": "stringInterpolation",
+                  "resolveData": {
+                    "template": "Your order ( $param ) is already completed please contact the helpline",
+                    "parameters": [
+                      {
+                        "resolveType": "jq",
+                        "resolveData": {
+                          "query": ".order_data.booking_code",
+                          "input": {
+                            "resolveType": "getStore",
+                            "resolveData": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "notification_data": {
+                "type": "order",
+                "body": {
+                  "resolveType": "stringInterpolation",
+                  "resolveData": {
+                    "template": "{\"order_id\" : \"$param\"}",
+                    "parameters": [
+                      {
+                        "resolveType": "jq",
+                        "resolveData": {
+                          "query": ".order_data.id",
+                          "input": {
+                            "resolveType": "getStore",
+                            "resolveData": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "notification_customer_id": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data.customer_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data.booking_status",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 7
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Order status not changed, order is already cancelled.",
+              "status": true,
+              "data": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          },
+          {
+            "resolveType": "setStore",
+            "resolveData": {
+              "notification": {
+                "title": "JustJoone",
+                "body": {
+                  "resolveType": "stringInterpolation",
+                  "resolveData": {
+                    "template": "Your order ( $param ) is already cancelled please contact the helpline",
+                    "parameters": [
+                      {
+                        "resolveType": "jq",
+                        "resolveData": {
+                          "query": ".order_data.booking_code",
+                          "input": {
+                            "resolveType": "getStore",
+                            "resolveData": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "notification_data": {
+                "type": "order",
+                "body": {
+                  "resolveType": "stringInterpolation",
+                  "resolveData": {
+                    "template": "{\"order_id\" : \"$param\"}",
+                    "parameters": [
+                      {
+                        "resolveType": "jq",
+                        "resolveData": {
+                          "query": ".order_data.id",
+                          "input": {
+                            "resolveType": "getStore",
+                            "resolveData": {}
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "notification_customer_id": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data.customer_id",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              }
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".order_data.booking_status",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": 8
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

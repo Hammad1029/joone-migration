@@ -1,0 +1,16 @@
+{
+  "name": "rates-get",
+  "path": "/api/rates",
+  "method": "GET",
+  "description": "rates-get",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "rates-get"
+  }]
+}

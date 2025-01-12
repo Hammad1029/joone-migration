@@ -1,0 +1,31 @@
+{
+  "name": "order-update-status",
+  "description": "order-update-status",
+  "startState": 100,
+  "rules": ["verify-token", "order-check-status", "order-update-status", "push-notification"],
+  "branchFlows": {
+    "100": {
+      "rule": "verify-token",
+      "states": {
+        "0": 200
+      }
+    },
+    "200": {
+      "rule": "order-check-status",
+      "states": {
+        "0": 300,
+        "1": 400
+      }
+    },
+    "300": {
+      "rule": "order-update-status",
+      "states": {
+        "1": 400
+      }
+    },
+    "400": {
+      "rule": "push-notification",
+      "states": {}
+    }
+  }
+}

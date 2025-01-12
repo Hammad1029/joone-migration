@@ -1,0 +1,16 @@
+{
+  "name": "categories-all-access",
+  "path": "/api/category/all",
+  "method": "GET",
+  "description": "categories-all-access",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "categories-all-access"
+  }]
+}

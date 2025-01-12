@@ -1,0 +1,43 @@
+{
+  "name": "lead-create",
+  "path": "/api/lead/create",
+  "method": "POST",
+  "description": "lead-create",
+  "request": {
+    "name": {
+      "dataType": "text",
+      "required": true,
+      "config": {
+        "alpha": true,
+        "numeric": false,
+        "special": false,
+        "minimum": 0,
+        "maximum": 50,
+        "in": []
+      }
+    },
+    "phone": {
+      "dataType": "text",
+      "required": true,
+      "config": {
+        "alpha": false,
+        "numeric": true,
+        "special": false,
+        "minimum": 0,
+        "maximum": 13,
+        "in": []
+      }
+    }
+  },
+  "preConfig": {},
+  "triggers": [
+    {
+      "if": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      },
+      "trigger": "lead-create"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "categories-service-trending",
+  "description": "categories-service-trending",
+  "startState": 100,
+  "rules": ["categories-service-trending"],
+  "branchFlows": {
+    "100": {
+      "rule": "categories-service-trending",
+      "states": {}
+    }
+  }
+}

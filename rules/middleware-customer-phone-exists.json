@@ -1,0 +1,96 @@
+{
+  "name": "customer phone exists",
+  "description": "middleware to check customer phone exists",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "customer_data": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "user",
+                "where": {
+                  "template":"user.phone = ?",
+                  "values":[{
+                    "resolveType": "jq",
+                    "resolveData": {
+                      "query": ".phone",
+                      "input": {
+                        "resolveType": "getReq",
+                        "resolveData": {}
+                      }
+                    }
+                  }]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "access_token": "",
+              "customer": {},
+              "message": "Customer not registered with this Phone Number, please re-install the app and register.",
+              "status": false
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".customer_data",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "eq",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  }
+}

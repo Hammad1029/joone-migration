@@ -1,0 +1,14 @@
+{
+  "name": "order_status",
+  "table": "booking_statuses",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "booking_id", "as": "booking_id", "dataType": "number" },
+    { "column": "auth_guard", "as": "auth_guard", "dataType": "string" },
+    { "column": "user_id", "as": "user_id", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

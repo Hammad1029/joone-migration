@@ -1,0 +1,173 @@
+{
+  "name": "user-address-set-default",
+  "description": "user-address-set-default",
+  "pre": [
+    {
+      "resolveType": "setStore",
+      "resolveData": {
+        "address_found": {
+          "resolveType": "jq",
+          "resolveData": {
+            "query": ".results[0]",
+            "input": {
+              "resolveType": "orm",
+              "resolveData": {
+                "operation": "select",
+                "model": "user_addresses",
+                "where": {
+                  "template": "user_addresses.customer_id = ? and user_addresses.id = ?",
+                  "values": [
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".user_id",
+                        "input": {
+                          "resolveType": "getStore",
+                          "resolveData": {}
+                        }
+                      }
+                    },
+                    {
+                      "resolveType": "jq",
+                      "resolveData": {
+                        "query": ".address_id",
+                        "input": {
+                          "resolveType": "getReq",
+                          "resolveData": {}
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "switch": {
+    "cases": [
+      {
+        "do": [
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "update customer_addresses set is_primary = false where customer_id = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".user_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resolveType": "query",
+            "resolveData": {
+              "queryString": "update customer_addresses set is_primary = true where customer_id = ? and id = ?;",
+
+              "named": false,
+              "namedParameters": {},
+              "positionalParameters": [
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".user_id",
+                    "input": {
+                      "resolveType": "getStore",
+                      "resolveData": {}
+                    }
+                  }
+                },
+                {
+                  "resolveType": "jq",
+                  "resolveData": {
+                    "query": ".address_id",
+                    "input": {
+                      "resolveType": "getReq",
+                      "resolveData": {}
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "resolveType": "setRes",
+            "resolveData": {
+              "message": "Address is now set to primary address!",
+              "status": true
+            }
+          },
+          {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+        ],
+        "return": 1,
+        "condition": {
+          "group": true,
+          "conditionType": "AND",
+          "conditions": [
+            {
+              "group": false,
+              "op1": {
+                "resolveType": "jq",
+                "resolveData": {
+                  "query": ".address_found",
+                  "input": {
+                    "resolveType": "getStore",
+                    "resolveData": {}
+                  }
+                }
+              },
+              "opnd": "ne",
+              "op2": {
+                "resolveType": "const",
+                "resolveData": {
+                  "value": null
+                }
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "default": {
+      "do": [
+        {
+          "resolveType": "setRes",
+          "resolveData": {
+            "message": "Invalid Address",
+            "status": false
+          }
+        },
+        {
+  "resolveType": "event",
+  "resolveData": {
+    "trigger": "000"
+  }
+}
+      ],
+      "return": 0,
+      "condition": {
+        "group": true,
+        "conditionType": "AND",
+        "conditions": []
+      }
+    }
+  },
+  "finally": []
+}

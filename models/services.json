@@ -1,0 +1,19 @@
+{
+  "name": "services",
+  "table": "services",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "icon", "as": "icon", "dataType": "string" },
+    { "column": "slug", "as": "slug", "dataType": "string" },
+    { "column": "image", "as": "image", "dataType": "string" },
+    { "column": "category_id", "as": "category_id", "dataType": "number" },
+    { "column": "amount", "as": "amount", "dataType": "number" },
+    { "column": "discount", "as": "discount", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" },
+    { "column": "type", "as": "type", "dataType": "number" },
+    { "column": "is_trending", "as": "is_trending", "dataType": "number" },
+    { "column": "is_special_offer", "as": "is_special_offer", "dataType": "number" }
+  ]
+}

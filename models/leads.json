@@ -1,0 +1,23 @@
+{
+  "name": "leads",
+  "table": "leads",
+  "primaryKey": "id",
+  "projections": [
+    { "column": "id", "as": "id", "dataType": "number" },
+    { "column": "name", "as": "name", "dataType": "string" },
+    { "column": "phone", "as": "phone", "dataType": "string" },
+    { "column": "email", "as": "email", "dataType": "string" },
+    {
+      "column": "customer_comment",
+      "as": "customer_comment",
+      "dataType": "string"
+    },
+    { "column": "city_id", "as": "city_id", "dataType": "number" },
+    { "column": "lead_date", "as": "lead_date", "dataType": "string" },
+    { "column": "lead_time", "as": "lead_time", "dataType": "string" },
+    { "column": "source", "as": "source", "dataType": "number" },
+    { "column": "status", "as": "status", "dataType": "number" },
+    { "column": "created_at", "as": "created_at", "dataType": "string" },
+    { "column": "updated_at", "as": "updated_at", "dataType": "string" }
+  ]
+}

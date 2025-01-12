@@ -1,0 +1,16 @@
+{
+  "name": "user-address-delete",
+  "path": "/api/user/address/delete",
+  "method": "POST",
+  "description": "user-address-delete",
+  "request": {} ,
+  "preConfig": {} ,
+  "triggers": [{
+    "if": {
+      "group": true,
+      "conditionType": "AND",
+      "conditions": []
+    },
+    "trigger": "user-address-delete"
+  }]
+}
